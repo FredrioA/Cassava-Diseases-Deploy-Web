@@ -15,7 +15,7 @@ def predict_label(img_path):
     loaded_img = load_img(img_path, target_size=(224, 224))
     img_array = img_to_array(loaded_img)
     img_array = expand_dims(img_array, axis=0)
-    classes = model.predict(images)
+    classes = model.predict(img_array)
     predicted_bit = class_dict[np.argmax(classes)]
     return predicted_bit
     
