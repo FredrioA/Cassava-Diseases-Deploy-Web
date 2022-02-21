@@ -20,10 +20,10 @@ def predict_label(img_path):
     predic = classes.max(1)
     
     for j in range(5):
-    if classes[0][j] == predic :
-      predicted_bit=class_dict[j]
-      return predicted_bit
-      break
+        if classes[0][j] == predic :
+            predicted_bit=class_dict[j]
+            return predicted_bit
+            break
     
 
 @app.route('/', methods=['GET', 'POST'])
