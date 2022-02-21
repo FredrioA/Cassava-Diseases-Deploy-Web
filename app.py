@@ -17,8 +17,14 @@ def predict_label(img_path):
     img_array = expand_dims(img_array, axis=0) / 255
     images = np.vstack([img_array])
     classes = model.predict(images)
-    predicted_bit = class_dict[np.argmax(classes)]
-    return predicted_bit
+    predic = classes.max(1)
+    
+    for j in range(5):
+    if classes[0][j] == predic :
+      predicted_bit=class_dict[j]
+      return predicted_bit
+      break
+    
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
