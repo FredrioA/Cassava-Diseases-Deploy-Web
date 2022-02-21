@@ -16,7 +16,7 @@ def predict_label(img_path):
     img_array = img_to_array(loaded_img)
     img_array = expand_dims(img_array, axis=0)
     images = np.vstack([img_array])
-    predicted_bit = model.predict(images)
+    predicted_bit = np.round(model.predict(images)).astype('int')
     return class_dict[predicted_bit]
 
 @app.route('/', methods=['GET', 'POST'])
