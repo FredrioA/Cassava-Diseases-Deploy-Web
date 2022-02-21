@@ -13,9 +13,11 @@ class_dict = {0: 'Cassava Bacterial Blight', 1: 'Cassava Brown Streak Disease', 
 
 def predict_label(img_path):
     loaded_img = load_img(img_path, target_size=(224, 224))
-    img_array = img_to_array(loaded_img) / 255.0
-    img_array = expand_dims(img_array, 0)
-    predicted_bit = np.round(model.predict(img_array)[0][0]).astype('int')
+    img_array = img_to_array(loaded_img)
+    img_array = expand_dims(img_array, axis=0)
+    images = np.vstack([img_array])
+    classes = model.predict(images)
+    predicted_bit = classes.max(1)
     return class_dict[predicted_bit]
 
 @app.route('/', methods=['GET', 'POST'])
