@@ -9,15 +9,15 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = './static/uploads/'
 model = load_model('cnn_leaf_diseases_ef0_basic3_224-10_model.h5')
 
-class_dict = {0: 'Cassava Bacterial Blight', 1: 'Cassava Brown Streak Disease', 2:'Cassava Green Mottle', 3:'Cassava Mosaic Disease', 4:'Healthy'}
+class_dict = ['Cassava Bacterial Blight', 'Cassava Brown Streak Disease', 'Cassava Green Mottle', 'Cassava Mosaic Disease', 'Healthy']
 
 def predict_label(img_path):
     loaded_img = load_img(img_path, target_size=(224, 224))
     img_array = img_to_array(loaded_img)
-    img_array = expand_dims(img_array, axis=0)
-    images = np.vstack([img_array])
-    predicted_bit = np.round(model.predict(images)).astype('int')
-    return class_dict[predicted_bit]
+    img_array = expand_dims(img_array, axis=0) / 255
+    classes = model.predict(img_array)
+    predicted_bit = class_dict[np.argmax(classes)]
+    return predicted_bit
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
