@@ -55,8 +55,15 @@
                         Upload cassava leaf image
                     </p>
                 </div>
-                {% endif %} {% if prediction %}
-                <p class="mb-8">Prediction: {{prediction}}</p>
+                {% endif %} 
+                {% if prediction %}
+                    {% if prediction_value > 50 %}
+                        <p class="mb-8">Prediction: {{prediction}}</p><br>
+                        <p class="mb-8">{{prediction_value}}</p>
+                    {% else %}
+                        <p class="mb-8">Wrong image or unclear image!</p><br>
+                        <p class="mb-8">{{prediction_value}}</p>
+                    {% endif %}
                 {% endif %}
 
                 <form
