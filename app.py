@@ -20,7 +20,7 @@ def predict_label(img_path, model):
     predict_value = round(np.max(classes)*100, 2)
     value_cbb = round(classes[0][0]*100, 2)
     value_cbsd = round(classes[0][1]*100, 2)
-    value_cgm = round(classes[0][2}*100, 2)
+    value_cgm = round(classes[0][2]*100, 2)
     value_cmd = round(classes[0][3]*100, 2)
     value_heal = round(classes[0][4]*100, 2)
     return predict_bit, predict_value, value_cbb, value_cbsd, value_cgm, value_cmd, value_heal
