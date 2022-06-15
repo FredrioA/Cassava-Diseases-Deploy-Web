@@ -18,12 +18,13 @@ def predict_label(img_path, model):
     classes = model.predict(img_array)
     predict_class = class_dict[np.argmax(classes)]
     predict_value = round(np.max(classes)*100, 2)
-    value_cbb = round(classes[0][0]*100, 2)
-    value_cbsd = round(classes[0][1]*100, 2)
-    value_cgm = round(classes[0][2]*100, 2)
-    value_cmd = round(classes[0][3]*100, 2)
-    value_heal = round(classes[0][4]*100, 2)
-    return predict_class, predict_value, value_cbb, value_cbsd, value_cgm, value_cmd, value_heal
+    #value_cbb = round(classes[0][0]*100, 2)
+    #value_cbsd = round(classes[0][1]*100, 2)
+    #value_cgm = round(classes[0][2]*100, 2)
+    #value_cmd = round(classes[0][3]*100, 2)
+    #value_heal = round(classes[0][4]*100, 2)
+    return predict_class, predict_value
+#value_cbb, value_cbsd, value_cgm, value_cmd, value_heal
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -32,8 +33,8 @@ def index():
             image = request.files['image']
             img_path = os.path.join(app.config['UPLOAD_FOLDER'], image.filename)
             image.save(img_path)
-            prediction, prediction_value, cbb_value, cbsd_value, cgm_value, cmd_value, heal_value = predict_label(img_path, model)
-            return render_template('index.html', uploaded_image=image.filename, prediction=predict_class, prediction_value=predict_value, cbb_value=value_cbb, cbsd_value=value_cbsd, cgm_value=value_cgm, cmd_value=value_cmd, heal_value=value_heal)
+            prediction, prediction_value = predict_label(img_path, model) #cbb_value, cbsd_value, cgm_value, cmd_value, heal_value
+            return render_template('index.html', uploaded_image=image.filename, prediction=predict_class, prediction_value=predict_value) #cbb_value=value_cbb, cbsd_value=value_cbsd, cgm_value=value_cgm, cmd_value=value_cmd, heal_value=value_heal)
 
     return render_template('index.html')
 
