@@ -33,8 +33,7 @@ def index():
             img_path = os.path.join(app.config['UPLOAD_FOLDER'], image.filename)
             image.save(img_path)
             prediction, prediction_value, cbb_value, cbsd_value, cgm_value, cmd_value, heal_value = predict_label(img_path, model)
-            return render_template('index.html', uploaded_image=image.filename, prediction=predict_bit, prediction_value=predict_value, 
-                cbb_value=value_cbb, cbsd_value=value_cbsd, cgm_value=value_cgm, cmd_value=value_cmd, heal_value=value_heal)
+            return render_template('index.html', uploaded_image=image.filename, prediction=predict_bit, prediction_value=predict_value, cbb_value=value_cbb, cbsd_value=value_cbsd, cgm_value=value_cgm, cmd_value=value_cmd, heal_value=value_heal)
 
     return render_template('index.html')
 
