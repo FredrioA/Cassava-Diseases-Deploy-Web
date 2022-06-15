@@ -58,9 +58,9 @@
                 {% endif %} 
                 {% if prediction %}
                     {% if prediction_value > 70 %}
-                        <p class="mb-8">Prediction: {{prediction}}</p><br>
+                        <p>Prediction: {{prediction}}</p>
                     {% else %}
-                        <p class="mb-8">Wrong image or unclear image!</p><br>
+                        <p>Wrong image or unclear image!</p>
                     {% endif %}
                 
                     <div
@@ -73,7 +73,7 @@
                         bg-gray-100
                     "
                     >
-                        <p>CBB({{cbb_value}}), CBSD({{cbsd_value}}), CGM({{cgm_value}}), CMD({{cmd_value}}), Healthy({{heal_value}})</p>
+                        <p>CBB({{cbb_value}}%), CBSD({{cbsd_value}}%), CGM({{cgm_value}}%), CMD({{cmd_value}}%), Healthy({{heal_value}}%)</p>
                     </div>
                 {% endif %}
                 
