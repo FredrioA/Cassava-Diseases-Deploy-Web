@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+            rel="stylesheet"
+        />
+        <title>Cassava Diseases Classification</title>
+    </head>
+    <body class=" bg-green-400">
+        <section
+            class="
+                flex
+                w-screen
+                h-screen
+                justify-center
+                items-center
+            "
+        >
+            <main
+                class="
+                    flex flex-col
+                    justify-center
+                    items-center
+                    p-16
+                    bg-white
+                    rounded-lg
+                "
+            >
+                <h1 class="text-3xl text-bold">Cassava Diseases Classification</h1>
+
+                {% if uploaded_image %}
+                <img
+                    src="{{ url_for('send_uploaded_image', filename=uploaded_image) }}"
+                    class="mt-8 mb-4 h-48 border-8 border-gray-200 rounded-md"
+                />
+                {% else %}
+                <div
+                    class="
+                        flex
+                        justify-center
+                        items-center
+                        my-8
+                        w-48
+                        h-48
+                        border-8 border-gray-200
+                        rounded-md
+                    "
+                >
+                    <p class="text-center">
+                        Upload cassava leaf image
+                    </p>
+                </div>
+
+                {% endif %} 
+                {% if prediction %}
+                    {% if prediction_value > 70 %}
+                        <p>Prediction: {{prediction}}</p>
+                    {% else %}
+                        <p>Wrong image or unclear image!</p>
+                    {% endif %}
+                
+                    <div
+                    class="
+                        flex
+                        justify-center
+                        my-8
+                        border-8 border-gray-200
+                        rounded-md
+                        bg-gray-100
+                    "
+                    >
+                        <p>CBB({{cbb_value}}%), CBSD({{cbsd_value}}%), CGM({{cgm_value}}%), CMD({{cmd_value}}%), Healthy({{heal_value}}%)</p>
+                    </div>
+                {% endif %}
+                
+                <form
+                    method="post"
+                    enctype="multipart/form-data"
+                    class="flex flex-col"
+                >
+                    <input
+                        type="file"
+                        name="image"
+                        class="
+                            mb-4
+                            p-4
+                            border-8 border-gray-200
+                            rounded-md
+                            bg-gray-100
+                        "
+                    />
+                    <button
+                        type="submit"
+                        class="p-4 bg-green-700 text-white rounded-md"
+                    >
+                        Predic Image
+                    </button>
+                </form>
+            </main>
+        </section>
+    </body>
+</html>
